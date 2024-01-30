@@ -1,0 +1,49 @@
+
+.wall{
+    background: url('./assets/wall.png');
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+}
+div{
+    margin: -2px;
+}
+.pacman{
+    background: url('./assets/pac-man.jpeg');
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+}
+.coin{
+    background: url('./assets/coin.png');
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+}
+.ground{
+    background: url('./assets/ground.jpg');
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+}
+
+.right{
+    z-index: 121;
+    position: relative;
+    left: 100px;
+}
+.left{
+    z-index: 121;
+    position: relative;
+    left: -100px;
+}
