@@ -3,7 +3,7 @@
 //right - 39
 // up - 38
 // down - 40
-// const pacManEl = document.getElementById('pacman')
+
 
 // document.addEventListener('keydown', (e) => {
     
@@ -42,6 +42,8 @@ var map = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1]
 ]
 
+let backgroundImage 
+
 //we don't want our pacman to go through this entire range to find them so we'll create another
 //variable called pacman that will be an object containing the correct position!
 var pacman = {
@@ -56,7 +58,7 @@ var score = 0
 
 // function here is set of some instructions
 
-function drawWorld(){
+function drawWorld(add){
     document.getElementById('world').innerHTML = ''
     for(let y=0 ; y<map.length; y=y+1){
         // console.log(map[y])
@@ -72,7 +74,7 @@ function drawWorld(){
                 document.getElementById('world').innerHTML += '<div class="ground"></div>'
             }
             else if(map[y][x] === 7){
-                document.getElementById('world').innerHTML += '<div class="pacman"></div>'
+                document.getElementById('world').innerHTML += `<div class="pacman ${add}" id="pacman"></div>`
             }
         }
         document.getElementById('world').innerHTML += '<br>'
@@ -81,61 +83,95 @@ function drawWorld(){
 
 drawWorld()//invoking the function
 
+document.addEventListener('DOMContentLoaded', () => {
+    let pacManEl = document.getElementById('pacman')
+    
+    if(pacManEl){
+        document.onkeydown = (e) => {
+            // pacManEl.classList.remove('left', 'right', 'up', 'down');
+            // console.log(e)
+            if(e.key == 'ArrowLeft'){
+                console.log('Left key pressed');
+                //left
+                if(map[pacman.y][pacman.x - 1] !== 1){
+                    if(map[pacman.y][pacman.x - 1] === 2){
+                        score = score + 10
+                        scoreboard()
+                    }
+                    map[pacman.y][pacman.x] = 3
+                    pacman.x = pacman.x - 1
+                    map[pacman.y][pacman.x] = 7
+                    drawWorld('left')
+                    // backgroundImage = "url('./assets/pac-man-left.jpeg')"
+                }
+                // pacManEl.classList.remove('right');
+                // pacManEl.classList.add('left');
+            }
+            else if(e.key == 'ArrowRight'){
+                //right
+                console.log('Right key pressed');
+                if(map[pacman.y][pacman.x + 1] !== 1){
+                    if(map[pacman.y][pacman.x + 1] === 2){
+                        score = score + 10
+                        scoreboard()
+                    }
+                    map[pacman.y][pacman.x] = 3
+                    pacman.x = pacman.x + 1
+                    map[pacman.y][pacman.x] = 7
+                    drawWorld('right')
+                    
+                    // backgroundImage = "url('./assets/pac-man-right.jpeg')"
+                }
+                // pacManEl.classList.remove('left');
+                // pacManEl.classList.add('right');
+            }
+            else if(e.key == 'ArrowUp'){
+                console.log(pacManEl)
+                // up
+                console.log('Up key pressed');
+                if(map[pacman.y-1][pacman.x] !== 1){
+                    if(map[pacman.y - 1][pacman.x] === 2){
+                        score = score + 10
+                        scoreboard()
+                    }
+                    map[pacman.y][pacman.x] = 3
+                    pacman.y = pacman.y - 1
+                    map[pacman.y][pacman.x] = 7
+                    // pacManEl.classList.remove('pacman');
+                    // pacManEl.classList.add('up');
+                    drawWorld('up')
+                    // backgroundImage = "url('./assets/pac-man-up.jpeg')"
+                    
+                }
+                
+                console.log()
+            }
+            else if(e.key == 'ArrowDown'){
+               // down
+               console.log('Down key pressed');
+               if(map[pacman.y+1][pacman.x] !== 1){
+                if(map[pacman.y + 1][pacman.x] === 2){
+                    score = score + 10
+                    scoreboard()
+                }   
+                     map[pacman.y][pacman.x] = 3
+                    pacman.y = pacman.y + 1
+                    map[pacman.y][pacman.x] = 7
+                    drawWorld('down')  
+                // backgroundImage = "url('./assets/pac-man-down.jpeg')"
+                // pacManEl.classList.remove('up');
+                // pacManEl.classList.add('down');
+            }
+          }
+            // pacManEl.style.background = backgroundImage
+            // console.log(e.key)
+        }
+        
+    }else {
+        console.error("Element with ID 'pacman' not found");
+    }
+})
 
-document.onkeydown = (e) => {
-    console.log(e)
-    if(e.key == 'ArrowLeft'){
-        //left
-        if(map[pacman.y][pacman.x - 1] !== 1){
-            if(map[pacman.y][pacman.x - 1] === 2){
-                score = score + 10
-                scoreboard()
-            }
-            map[pacman.y][pacman.x] = 3
-            pacman.x = pacman.x - 1
-            map[pacman.y][pacman.x] = 7
-            drawWorld()
-        }
-    }else if(e.key == 'ArrowRight'){
-        //right
-        if(map[pacman.y][pacman.x + 1] !== 1){
-            if(map[pacman.y][pacman.x + 1] === 2){
-                score = score + 10
-                scoreboard()
-            }
-            map[pacman.y][pacman.x] = 3
-            pacman.x = pacman.x + 1
-            map[pacman.y][pacman.x] = 7
-            drawWorld()
-        }
-    }else if(e.key == 'ArrowUp'){
-        // up
-        if(map[pacman.y-1][pacman.x] !== 1){
-            if(map[pacman.y - 1][pacman.x] === 2){
-                score = score + 10
-                scoreboard()
-            }
-            map[pacman.y][pacman.x] = 3
-            pacman.y = pacman.y - 1
-            map[pacman.y][pacman.x] = 7
-            drawWorld()
-        }
-        console.log()
-    }else if(e.key == 'ArrowDown'){
-       // down
-       if(map[pacman.y+1][pacman.x] !== 1){
-        if(map[pacman.y + 1][pacman.x] === 2){
-            score = score + 10
-            scoreboard()
-        }
-        map[pacman.y][pacman.x] = 3
-        pacman.y = pacman.y + 1
-        map[pacman.y][pacman.x] = 7
-        drawWorld()
-    }
-    }
-    // console.log(e.key)
-}
 
 
 function scoreboard(){

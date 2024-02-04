@@ -9,15 +9,15 @@
 div{
     margin: -2px;
 }
-.pacman{
-    background: url('./assets/pac-man.jpeg');
+/* .pacman{
+    background: url('./assets/pac-man-right.jpeg');
     background-size: cover;
     background-position: center;
     object-fit: cover;
     height: 50px;
     width: 50px;
     display: inline-block;
-}
+} */
 .coin{
     background: url('./assets/coin.png');
     background-size: cover;
@@ -37,13 +37,32 @@ div{
     display: inline-block;
 }
 
-.right{
-    z-index: 121;
-    position: relative;
-    left: 100px;
+.pacman {
+    background: url('./assets/pac-man-right.jpeg');
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
 }
-.left{
-    z-index: 121;
-    position: relative;
-    left: -100px;
+
+.left {
+    background-image: url('./assets/pac-man-left.jpeg');
+    
+}
+
+.right {
+    background-image: url('./assets/pac-man-right.jpeg');
+    
+}
+
+.up {
+    background-image: url('./assets/pac-man-up.jpeg');
+    
+}
+
+.down {
+    background-image: url('./assets/pac-man-down.jpeg');
+    
 }
